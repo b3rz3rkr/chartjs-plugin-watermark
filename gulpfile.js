@@ -1,20 +1,17 @@
-var gulp = require('gulp');
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var merge = require('merge-stream');
-var streamify = require('gulp-streamify');
-var uglify = require('gulp-uglify');
-var insert = require('gulp-insert');
-var concat = require('gulp-concat');
-var buffer = require('vinyl-buffer');
+const gulp = require('gulp');
+const browserify = require('browserify');
+const source = require('vinyl-source-stream');
+const streamify = require('gulp-streamify');
+const uglify = require('gulp-uglify');
+const insert = require('gulp-insert');
+const concat = require('gulp-concat');
+const buffer = require('vinyl-buffer');
 
-var header = "/* chartjs-plugin-watermark | AlbinoDrought | MIT License | https://github.com/AlbinoDrought/chartjs-plugin-watermark/blob/master/LICENSE */\n";
-var outDir = "./";
+const header = '/* chartjs-plugin-watermark | AlbinoDrought | MIT License | https://github.com/AlbinoDrought/chartjs-plugin-watermark/blob/master/LICENSE */\n';
+const outDir = './';
 
-gulp.task('build', buildTask);
-
-function buildTask() {
-    var build = browserify('./src/chart.plugin.watermark.js')
+const buildTask = () => {
+    const build = browserify('./src/chart.plugin.watermark.js')
         .ignore('chart.js')
         .bundle()
         .pipe(source('chartjs-plugin-watermark.js'))
@@ -28,4 +25,6 @@ function buildTask() {
         .pipe(gulp.dest(outDir));
 
     return build;
-}
+};
+
+gulp.task('default', buildTask);
